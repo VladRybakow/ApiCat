@@ -19,7 +19,6 @@ namespace RestApiCat.Views
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-
             listView.ItemsSource = await App.CountManager.GetTasksAsync();
         }
     }

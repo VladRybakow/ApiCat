@@ -14,20 +14,18 @@ namespace RestApiCat.Services
         HttpClient client;
         JsonSerializerOptions serializerOptions;
 
-        public CountModel Count { get; private set; }
-
+        public List<EntryModel> entryModels { get; set; }
         public RestService()
         {
             client = new HttpClient();
             serializerOptions = new JsonSerializerOptions
             {
-                WriteIndented = true
             };
         }
 
         public async Task<List<EntryModel>> GetDataAsync()
         {
-            Count = new CountModel();
+            entryModels = new List<EntryModel>();
             Uri uri = new Uri(string.Format(Constants.RestUrl, string.Empty));
             try
             {
@@ -35,7 +33,7 @@ namespace RestApiCat.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
-                    Count = JsonSerializer.Deserialize<CountModel>(content, serializerOptions);
+                    entryModels = JsonSerializer.Deserialize<List<EntryModel>>(content);
                 }
             }
             catch (Exception ex)
@@ -43,7 +41,7 @@ namespace RestApiCat.Services
                 Debug.WriteLine(ex.Message);
             }
 
-            return Count.entries;
+            return entryModels;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace RestApiCat
 {
     public partial class App : Application
     {
-        public static EntryManager CountManager { get; private set; }
+        public static EntryManager CountManager { get; set; }
         public App()
         {
             InitializeComponent();

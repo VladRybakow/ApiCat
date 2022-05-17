@@ -9,5 +9,7 @@ namespace RestApiCat.Services
     public interface IRestService
     {
         Task<List<EntryModel>> GetDataAsync();
+        Task SaveTodoItemAsync(EntryModel item, bool isNewItem);
+        Task DeleteTodoItemAsync(EntryModel item);
     }
 }

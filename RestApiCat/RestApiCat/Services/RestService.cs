@@ -20,6 +20,7 @@ namespace RestApiCat.Services
             client = new HttpClient();
             serializerOptions = new JsonSerializerOptions
             {
+            
             };
         }
 
@@ -42,6 +43,55 @@ namespace RestApiCat.Services
             }
 
             return entryModels;
+        }
+        public async Task SaveTodoItemAsync(EntryModel item, bool isNewItem)
+        {
+            Uri uri = new Uri(string.Format(Constants.RestUrl, string.Empty));
+            try
+            {
+                string json = JsonSerializer.Serialize(item, serializerOptions);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = null;
+                if (isNewItem)
+                {
+                    response = await client.PostAsync(uri, content);
+                }
+
+                else
+                {
+                    response = await client.PutAsync(uri, content);
+                }
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine("@@@Success");
+                }
+            }
+
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+        public async Task DeleteTodoItemAsync(EntryModel item)
+        {
+            Uri uri = new Uri(string.Format(Constants.RestUrl, item.id));
+
+            try
+            {
+                HttpResponseMessage httpResponseMessage = await client.DeleteAsync(uri);
+
+                if (httpResponseMessage.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine("@@@Success");
+                }
+            }
+
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"@@@@@@@@@@//// {ex.Message}");
+            }
         }
     }
 }

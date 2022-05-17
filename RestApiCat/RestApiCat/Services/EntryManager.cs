@@ -19,5 +19,13 @@ namespace RestApiCat.Services
 		{
 			return restService.GetDataAsync();
 		}
+		public Task DeleteTodoAsync(EntryModel item)
+		{
+			return restService.DeleteTodoItemAsync(item);
+		}
+		public Task SaveItemAsync(EntryModel todoItem, bool isNewItem = false)
+		{
+			return restService.SaveTodoItemAsync(todoItem, isNewItem);
+		}
 	}
 }

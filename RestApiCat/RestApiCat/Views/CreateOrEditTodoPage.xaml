@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RestApiCat.Views.CreateOrEditTodoPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout>
+                <Label HorizontalOptions="CenterAndExpand" Text="Название котика" />
+                <Entry Placeholder="введите текст" Text="{Binding name}"/>
+                <Label HorizontalOptions="CenterAndExpand" Text="Цвет котика" />
+                <Entry Placeholder="введите текст" Text="{Binding color}"/>
+                <Button Clicked="SaveButton_Clicked" Text="Сохранить" />
+                <Button Clicked="DeleteButton_Clicked" Text="Удалить" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
